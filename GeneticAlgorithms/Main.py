@@ -7,7 +7,7 @@ Created on 3 abr. 2019
 @author: Antonelli, Nicolás - Recalde, Alejando - Rohn, Alex
 '''
 from GeneticAlgorithms.Population import Population
-# from GeneticAlgorithms import Chromosome
+# from GeneticAlgorithms.Chromosome import Chromosome
 
 # ImportantValues
 iterationLimit = 3 #900

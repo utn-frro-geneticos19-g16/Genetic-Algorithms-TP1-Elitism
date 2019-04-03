@@ -31,10 +31,6 @@ class Population(object):
             print()
         print()
     
-    # Reproduction
-    def reproduce(self):
-        pass
-    
     # Update Total of Objective Functions
     def updateTotalObjAdapt(self,oneObjectiveValue):
         self.totalObjAdapt += oneObjectiveValue
@@ -42,6 +38,22 @@ class Population(object):
     # Add to Population
     def addChrom(self,Chrom):
         self.population.append(Chrom)
+    
+    # Reproduction
+    def reproduce(self):
+        pass
+    
+    def crossProb(self,vector):
+        pass
+    
+    def cross(self,Chrom1,Chrom2,vector):
+        pass
+    
+    def mutation(self,chrom):
+        pass
+    
+    def calculateAllFitness(self):
+        pass
     
     # Getters and Setters 
     def getNumChroms(self):
