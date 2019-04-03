@@ -1,5 +1,6 @@
 # Genetic-Algorithms
 Trabajos para Algoritmos Genéticos (UTN FRRo 2019)
 
-Lenguajes: Pyton / C++
+Lenguajes: Python / C++
+
 Inregrantes: Antonelli - Recalde - Rohn
