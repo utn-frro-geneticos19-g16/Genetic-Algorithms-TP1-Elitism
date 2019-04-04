@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 import random
 
+# Constant
+coef = random.randint(1,230-1)
+
 class Chromosome(object): 
     
     # Constructor / Instance Attributes
@@ -14,12 +17,20 @@ class Chromosome(object):
             self.body.append(str((random.randint(0,1))))
         
         # Initialize Objective Adaptation and Fitness
-        binStr = ''.join(self.body)
-        self.objectiveAdaptation = int(binStr,2) # Real Number to pass on Objective Function
+        realValue = self.getRealValue()
+        self.objectiveAdaptation = self.calcObjFunc(realValue)
         self.fitness = 0;
     
+    # Show All Genes of the Chromosome
     def getBody(self):
         return self.body
+    
+    # Real Number to pass on Objective Function
+    def getRealValue(self):
+        return int(''.join(self.body),2) # Convert body to String and then to Binary Int
+    
+    def calcObjFunc(self,realValue):
+        return (realValue/coef)**2
     
     def calcFitness(self,fitness):
         pass
