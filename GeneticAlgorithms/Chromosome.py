@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 import random
 
-# Constant
-coef = random.randint(1,230-1)
 
-class Chromosome(object): 
-    
+class Chromosome(object):
+
+    coef = random.randint(1, 230 - 1)
+    # totObjFunc = 0
+
     # Constructor / Instance Attributes
     def __init__(self, large):
         
@@ -19,8 +20,11 @@ class Chromosome(object):
         # Initialize Objective Adaptation and Fitness
         realValue = self.getRealValue()
         self.objectiveAdaptation = self.calcObjFunc(realValue)
-        self.fitness = 0;
-    
+        self.fitness = 0
+        # sum = self.getTotObjFunc() + self.objectiveAdaptation
+        # self.setTotObjFunc(sum)
+        # self.fitness = self.calcFitness(self.objectiveAdaptation)
+
     # Show All Genes of the Chromosome
     def getBody(self):
         return self.body
@@ -29,13 +33,13 @@ class Chromosome(object):
     def getRealValue(self):
         return int(''.join(self.body),2) # Convert body to String and then to Binary Int
     
-    def calcObjFunc(self,realValue):
-        return (realValue/coef)**2
+    def calcObjFunc(self, realValue):
+        return (realValue/self.getCoef())**2
     
-    def calcFitness(self,fitness):
+    def calcFitness(self, fitness):
         pass
 
-    def copy(self,Chrom,num1,num2):
+    def copy(self, Chrom, num1, num2):
         pass
     
     def mutate(self):
@@ -59,4 +63,16 @@ class Chromosome(object):
     
     def setFintess(self,fitness):
         self.fitness = fitness
+
+    @classmethod
+    def getCoef(cls):
+        return cls.coef
+
+    @classmethod
+    def getTotObjFunc(cls):
+        return cls.totObjFunc
+
+    @classmethod
+    def setTotObjFunc(cls,objFunc):
+        cls.totObjFunc = objFunc
     
