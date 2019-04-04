@@ -21,17 +21,37 @@ class Population(object):
             oneObjectiveFunction = oneChrom.getObjectiveAdaptation() # Objective Function of Chromosomes
             self.updateTotalObjAdapt(oneObjectiveFunction) # Update Class Attribute 
     
-    # Show Actual Population
-    def showPopulation(self,num):
+    # Show Actual Population and Stats
+    def showPopulation(self,numIter):
         large = self.getChromSize()
-        print("Population ",(num+1),":")
-        for chroms in (self.population):
-            for i in range(large):
-                print(chroms.getBody()[i],end='')
+        averageAdapt = self.getTotalObjAdapt()/len(self.population)
+        averageFit = 0
+        maxVal = 0
+        minVal = 0
+        maxChrom = 0
+        minChrom = 0
+        print("Population ",(numIter+1),":")
+        for i in range(len((self.population))):
+            averageFit += self.population[i].calcFitness(self.getTotalObjAdapt())
+            if averageFit>maxVal:
+                maxVal=averageFit
+                maxChrom=i
+            elif averageFit<minVal:
+                minVal=averageFit
+                minChrom=i 
+            for j in range(large):
+                print(self.population[i].getBody()[j],end='')
             print()
+        averageFit = averageFit/len(self.population)
         print()
-    
+        print("Chromosome --- Value --- Objective Punctuation --- Fitness")
+        print("Max Values: Chrom Nº",maxChrom,"with:",self.population[maxChrom].getRealValue(),"Val,",self.population[maxChrom].getObjectiveAdaptation(),"OP,",maxVal,"Fit")
+        print("Min Values: Chrom Nº",minChrom,"with:",self.population[minChrom].getRealValue(),"Val,",self.population[minChrom].getObjectiveAdaptation(),"OP,",minVal,"Fit")
+        print("Average OP:",averageAdapt,"--- Average Fitness:",averageFit)
+        print()
+        
     # Update Total of Objective Functions
+    @classmethod
     def updateTotalObjAdapt(self,oneObjectiveValue):
         self.totalObjAdapt += oneObjectiveValue
     
@@ -52,8 +72,18 @@ class Population(object):
     def mutation(self,chrom):
         pass
     
-    def calculateAllFitness(self):
-        pass
+    # def calculateAllFitness(self):
+    
+    
+    # Class Methods
+    @classmethod
+    def getTotalObjAdapt(cls):
+        return cls.totalObjAdapt
+
+    @classmethod
+    def setTotalObjAdapt(cls,total):
+        cls.totalObjAdapt = total
+        
     
     # Getters and Setters 
     def getNumChroms(self):

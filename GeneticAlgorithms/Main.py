@@ -30,7 +30,7 @@ FECHA DE ENTREGA DEL TRABAJO PRÁCTICO: 30 de Abril de 2019
 
 from GeneticAlgorithms.Population import Population
 # from GeneticAlgorithms.Chromosome import Chromosome
-import random
+# import random
 
 # ImportantValues
 iterationLimit = 4 #20,100,200  # Population Iterations
