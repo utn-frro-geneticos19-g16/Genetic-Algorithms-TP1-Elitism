@@ -6,7 +6,8 @@ class Population(object):
     
     # Class Attributes
     population = [] # Initial Population (Array of Chromosomes)
-    totalObjAdapt = 0 # The Sum of All Objective Functions
+    totalObjPunc = 0 # The Sum of All Objective Functions Punctuation
+    totalFitness = 0 # The Sum of All Objective Values
     
     # Constructor / Instance Attributes
     def __init__(self,numChroms,chromSize,crossProb,mutProb):
@@ -18,50 +19,57 @@ class Population(object):
         for _ in range(numChroms):
             oneChrom = Chromosome(chromSize) # Initialization of Chromosomes
             self.addChrom(oneChrom) # Add to Population
-            oneObjectiveFunction = oneChrom.getObjectiveAdaptation() # Objective Function of Chromosomes
-            self.updateTotalObjAdapt(oneObjectiveFunction) # Update Class Attribute 
+            oneObjectivePunctuation = oneChrom.getObjectivePunctuation() # Objective Function Punctuation of Chromosomes
+            self.updateTotalObjPunc(oneObjectivePunctuation) # Update Class Attribute 
     
     # Show Actual Population and Stats
     def showPopulation(self,numIter):
+        self.setTotalFitness(0)
         large = self.getChromSize()
-        averageAdapt = self.getTotalObjAdapt()/len(self.population)
-        averageFit = 0
+        averageObjPunc = self.getTotalObjPunc()/len(self.population)
+        fitness = 0
         maxVal = 0
         minVal = 0
         maxChrom = 0
         minChrom = 0
         print("Population ",(numIter+1),":")
         for i in range(len((self.population))):
-            averageFit += self.population[i].calcFitness(self.getTotalObjAdapt())
-            if averageFit>maxVal:
-                maxVal=averageFit
+            fitness = self.population[i].calcFitness(self.getTotalObjPunc())
+            self.updateTotalFitness(fitness)
+            if i==0:
+                maxVal=fitness
+                minVal=fitness
+            elif fitness>maxVal:
+                maxVal=fitness
                 maxChrom=i
-            elif averageFit<minVal:
-                minVal=averageFit
+            elif fitness<minVal:
+                minVal=fitness
                 minChrom=i 
             for j in range(large):
                 print(self.population[i].getBody()[j],end='')
             print()
-        averageFit = averageFit/len(self.population)
+        fitness = self.getTotalFitnessAverage()
         print()
         print("Chromosome --- Value --- Objective Punctuation --- Fitness")
-        print("Max Values: Chrom Nº",maxChrom,"with:",self.population[maxChrom].getRealValue(),"Val,",self.population[maxChrom].getObjectiveAdaptation(),"OP,",maxVal,"Fit")
-        print("Min Values: Chrom Nº",minChrom,"with:",self.population[minChrom].getRealValue(),"Val,",self.population[minChrom].getObjectiveAdaptation(),"OP,",minVal,"Fit")
-        print("Average OP:",averageAdapt,"--- Average Fitness:",averageFit)
+        print("Max Values: Chrom Nº",maxChrom,"with:",self.population[maxChrom].getRealValue(),"Val,",self.population[maxChrom].getObjectivePunctuation(),"OP,",maxVal,"Fit")
+        print("Min Values: Chrom Nº",minChrom,"with:",self.population[minChrom].getRealValue(),"Val,",self.population[minChrom].getObjectivePunctuation(),"OP,",minVal,"Fit")
+        print("Average OP:",averageObjPunc,"--- Average Fitness:",fitness)
         print()
         
-    # Update Total of Objective Functions
+    # Update Total of Objective Functions Punctuation
     @classmethod
-    def updateTotalObjAdapt(self,oneObjectiveValue):
-        self.totalObjAdapt += oneObjectiveValue
+    def updateTotalObjPunc(cls,oneObjectiveValue):
+        cls.totalObjPunc += oneObjectiveValue
+    
+    # Update Total Fitness
+    @classmethod
+    def updateTotalFitness(cls,fitness):
+        cls.totalFitness += fitness
     
     # Add to Population
     def addChrom(self,Chrom):
         self.population.append(Chrom)
     
-    # Reproduction
-    def reproduce(self):
-        pass
     
     def crossProb(self,vector):
         pass
@@ -72,18 +80,33 @@ class Population(object):
     def mutation(self,chrom):
         pass
     
-    # def calculateAllFitness(self):
+    # Reproduction
+    def reproduce(self):
+        self.setTotalObjPunc(0)
+        pass
     
     
-    # Class Methods
+    # Class Getters and Setters
     @classmethod
-    def getTotalObjAdapt(cls):
-        return cls.totalObjAdapt
+    def getTotalObjPunc(cls):
+        return cls.totalObjPunc
 
     @classmethod
-    def setTotalObjAdapt(cls,total):
-        cls.totalObjAdapt = total
-        
+    def setTotalObjPunc(cls,total):
+        cls.totalObjPunc = total
+    
+    @classmethod
+    def getTotalFitness(cls):
+        return cls.totalFitness
+    
+    @classmethod
+    def setTotalFitness(cls,total):
+        cls.totalFitness = total   
+    
+    @classmethod
+    def getTotalFitnessAverage(cls):
+        return cls.totalFitness/len(cls.population)
+    
     
     # Getters and Setters 
     def getNumChroms(self):

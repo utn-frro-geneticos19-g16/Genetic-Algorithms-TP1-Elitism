@@ -33,7 +33,7 @@ from GeneticAlgorithms.Population import Population
 # import random
 
 # ImportantValues
-iterationLimit = 4 #20,100,200  # Population Iterations
+iterationLimit = 3 #20,100,200  # Population Iterations
 initPopulationNum = 10          # Initial Population Size
 chromsomeSize = 32              # Chromosome Size
 crossoverProb = 0.75            # Probability of CrossOver

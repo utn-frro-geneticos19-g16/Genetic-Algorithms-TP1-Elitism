@@ -16,13 +16,13 @@ class Chromosome(object):
         for _ in range (large):
             self.body.append(str((random.randint(0,1))))
         
-        # Initialize Objective Adaptation and Fitness
+        # Initialize Objective Function Punctuation and Fitness
         realValue = self.getRealValue()
-        self.objectiveAdaptation = self.calcObjFunc(realValue)
+        self.objectivePunctuation = self.calcObjPunc(realValue)
         self.fitness = 0;
-        # sum = self.getTotObjFunc() + self.objectiveAdaptation
+        # sum = self.getTotObjFunc() + self.objectivePunctuation
         # self.setTotObjFunc(sum)
-        # self.fitness = self.calcFitness(self.objectiveAdaptation
+        # self.fitness = self.calcFitness(self.objectivePunctuation
     
     # Show All Genes of the Chromosome
     def getBody(self):
@@ -32,12 +32,12 @@ class Chromosome(object):
     def getRealValue(self):
         return int(''.join(self.body),2) # Convert body to String and then to Binary Int
     
-    def calcObjFunc(self,realValue):
+    def calcObjPunc(self,realValue):
         return (realValue/self.getCoef())**2
     
     def calcFitness(self,totalObj):
         if totalObj==0: totalObj=1 # Prevent Division by Zero Error
-        self.fitness = (self.getObjectiveAdaptation()/totalObj) # Update Fitness
+        self.fitness = (self.getObjectivePunctuation()/totalObj) # Update Fitness
         return self.fitness
     
     def copy(self,Chrom,num1,num2):
@@ -55,14 +55,16 @@ class Chromosome(object):
     @classmethod
     def setCoef(cls,coeficient):
         cls.coef = coeficient
+    
+    '''
+    @classmethod
+    def getTotObjPunc(cls):
+        return cls.totObjPunc
 
     @classmethod
-    def getTotObjFunc(cls):
-        return cls.totObjFunc
-
-    @classmethod
-    def setTotObjFunc(cls,objFunc):
-        cls.totObjFunc = objFunc
+    def setTotObjPunc(cls,objPunc):
+        cls.totObjPunc = objPunc
+    '''
     
     
     # Getters and Setters
@@ -72,11 +74,11 @@ class Chromosome(object):
     def setLarge(self,large):
         self.large = large
     
-    def getObjectiveAdaptation(self):
-        return self.objectiveAdaptation
+    def getObjectivePunctuation(self):
+        return self.objectivePunctuation
     
-    def setObjectiveAdaptation(self,objectiveAdaptation):
-        self.objectiveAdaptation = objectiveAdaptation
+    def setObjectivePunctuation(self,objectivePunctuation):
+        self.objectivePunctuation = objectivePunctuation
     
     def getFitness(self):
         return self.fitness
