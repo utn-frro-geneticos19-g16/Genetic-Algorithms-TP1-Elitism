@@ -33,7 +33,7 @@ from GeneticAlgorithms.Population import Population
 # import random
 
 # ImportantValues
-iterationLimit = 3 #20,100,200  # Population Iterations
+iterationLimit = 20 #20,100,200  # Population Iterations
 initPopulationNum = 10          # Initial Population Size
 chromsomeSize = 32              # Chromosome Size
 crossoverProb = 0.75            # Probability of CrossOver
@@ -51,7 +51,7 @@ if __name__ == '__main__':
         pob.showPopulation(iterationCount);
 
         # In the last iteration, the chromosome population mustn't reproduce
-        if(iterationCount<iterationLimit):
+        if(iterationCount<iterationLimit-1):
             pob.reproduce();
     
     # End Comparation

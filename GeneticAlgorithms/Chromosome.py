@@ -30,7 +30,8 @@ class Chromosome(object):
     
     # Real Number to pass on Objective Function
     def getRealValue(self):
-        return int(''.join(self.body),2) # Convert body to String and then to Binary Int
+        num = ''.join(str(i) for i in self.body)
+        return int(num,2) # Convert body to String and then to Binary Int
     
     def calcObjPunc(self,realValue):
         return (realValue/self.getCoef())**2
@@ -55,16 +56,6 @@ class Chromosome(object):
     @classmethod
     def setCoef(cls,coeficient):
         cls.coef = coeficient
-    
-    '''
-    @classmethod
-    def getTotObjPunc(cls):
-        return cls.totObjPunc
-
-    @classmethod
-    def setTotObjPunc(cls,objPunc):
-        cls.totObjPunc = objPunc
-    '''
     
     
     # Getters and Setters
