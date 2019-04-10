@@ -8,21 +8,21 @@ class Chromosome(object):
     coef = random.randint(1,230-1)
     
     # Constructor / Instance Attributes
-    def __init__(self, large):
+    def __init__(self, large, newBody):
         
         # Chromosome's Genes
-        self.body = []
+        if newBody == None:
+            self.body = []
+            for _ in range(large):
+                self.body.append(str((random.randint(0,1))))
+        else:
+            self.body = newBody
         self.large = large
-        for _ in range (large):
-            self.body.append(str((random.randint(0,1))))
-        
         # Initialize Objective Function Punctuation and Fitness
         realValue = self.getRealValue()
         self.objectivePunctuation = self.calcObjPunc(realValue)
         self.fitness = 0;
-        # sum = self.getTotObjFunc() + self.objectivePunctuation
-        # self.setTotObjFunc(sum)
-        # self.fitness = self.calcFitness(self.objectivePunctuation
+
     
     # Show All Genes of the Chromosome
     def getBody(self):
@@ -76,4 +76,3 @@ class Chromosome(object):
     
     def setFintess(self,fitness):
         self.fitness = fitness
-    

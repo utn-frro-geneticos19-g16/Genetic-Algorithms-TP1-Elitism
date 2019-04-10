@@ -28,7 +28,8 @@ FECHA DE ENTREGA DEL TRABAJO PRÁCTICO: 30 de Abril de 2019
 @author: Antonelli, Nicolás - Recalde, Alejando - Rohn, Alex
 '''
 
-from GeneticAlgorithms.Population import Population
+from Population import Population
+# from GeneticAlgorithms.Population import Population
 # from GeneticAlgorithms.Chromosome import Chromosome
 # import random
 
@@ -56,4 +57,3 @@ if __name__ == '__main__':
     
     # End Comparation
     print("Convergence has occurred correctly")
-    

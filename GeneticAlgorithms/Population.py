@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from GeneticAlgorithms.Chromosome import Chromosome
+from Chromosome import Chromosome
+# from GeneticAlgorithms.Chromosome import Chromosome
 import random
 
 class Population(object):
@@ -18,7 +19,7 @@ class Population(object):
         self.mutProb = mutProb
         print("Objective Function Coeficient:",Chromosome.getCoef())
         for _ in range(numChroms):
-            oneChrom = Chromosome(chromSize) # Initialization of Chromosomes
+            oneChrom = Chromosome(chromSize, None) # Initialization of Chromosomes
             self.addChrom(oneChrom) # Add to Population
             oneObjectivePunctuation = oneChrom.getObjectivePunctuation() # Objective Function Punctuation of Chromosomes
             self.updateTotalObjPunc(oneObjectivePunctuation) # Update Class Attribute 
@@ -74,7 +75,7 @@ class Population(object):
     # Reproduction
     def reproduce(self):
         parents = [] # List of Potential Parents
-        descendence = [] # List of They Children
+        newGeneration = []
         print("Roulette Results: ",end='')
         for _ in range(len(self.population)):
             parents.append(self.population[self.roulette()]) # Parents Selected by Roulette
@@ -83,7 +84,7 @@ class Population(object):
             father1=parents[i]
             father2=parents[i+1]
             if (self.crossPosibility()==True): # CrossOver Probability Evaluation
-                self.cross(father1,father2) # CrossOver
+                self.cross(father1,father2,newGeneration) # CrossOver
                 print("Successful CrossOver in reproduction:",(i+2)/2)  # Comment this One when Finish
             else:
                 # Direct Assignation (Without CrossOver)
@@ -92,9 +93,8 @@ class Population(object):
             son2 = father2
             if (self.mutationPosibility()==True): self.mutation(son1) # Mutation Probability Evaluation
             if (self.mutationPosibility()==True): self.mutation(son2)
-            descendence.append(son1)
-            descendence.append(son2)
-        self.replacePopulation(descendence)
+
+        self.replacePopulation(newGeneration)
         self.setTotalFitness(0)
     
     # Genetic Operator (Roulette Method)
@@ -119,34 +119,40 @@ class Population(object):
         if(self.getCrossProb()*100 >= random.randint(1,100)): return True
         else: return False
     
-    def cross(self,chrom1,chrom2):
-        genMat1 = "" # Genetic Material to Exchange
-        genMat2 = ""
+    def cross(self,chrom1,chrom2,newGeneration):
+        newBody1 = []
+        newBody2 = []
         cut = random.randint(1,len(chrom1.getBody())-2) # Random Cut Point (Except by zero or all genes)
+        for i in range(0,cut): # Genetic Material Exchange (Genes)
+            newBody1.append(chrom1.getBody()[i])    # Each Chromosome Exchange Genes With the Other One
+            newBody2.append(chrom2.getBody()[i])
         for i in range(cut,len(chrom1.getBody())): # Genetic Material Exchange (Genes)
-            genMat1 = chrom1.getBody()[i]
-            genMat2 = chrom2.getBody()[i]
-            chrom1.getBody()[i] = genMat2 # Each Chromosome Exchange Genes With the Other One
-            chrom2.getBody()[i] = genMat1
+            newBody1.append(chrom1.getBody()[i])    # Each Chromosome Exchange Genes With the Other One
+            newBody2.append(chrom2.getBody()[i])
+        newGeneration.append(Chromosome(len(newBody1), newBody1))
+        newGeneration.append(Chromosome(len(newBody2), newBody2))
         print()
-        print("Son 1:",self.listToInt(chrom1.getBody())) # Comment this One when Finish
-        print("Son 2:",self.listToInt(chrom2.getBody())) # Comment this One when Finish
-        print("Cut Point on:",cut) # Comment this One when Finish
+        print("Son 1:",self.listToInt(newBody1)) # Comment this One when Finish
+        print("Son 2:",self.listToInt(newBody2)) # Comment this One when Finish
+        print("Cut Point on:", cut) # Comment this One when Finish
     
     def mutationPosibility(self): # Mutation posibility evaluation
         if(self.getMutProb()*100 >= random.randint(1,100)): return True
         else: return False
     
     def mutation(self,chrom): # Select one random Gen and Switch its Value
-        mutPos = 3
+        mutPos = random.randint(1,len(self.population))
         if chrom.getBody()[mutPos]==1: # If is a '0' then change to '1', and vice-versa
             chrom.getBody()[mutPos]=0
         else: chrom.getBody()[mutPos]=1
         print("Mutated Chrom in position:",mutPos,":",self.listToInt(chrom.getBody())) # Comment this One when Finish
     
-    def replacePopulation(self,newGeneration): # Replace All Population in every Iteration
-        for i in range(len(self.population)):
-            self.population[i]=newGeneration[i]
+    def replacePopulation(self, newGeneration):     # Replace All Population in every Iteration
+        self.population = []
+        for i in range(len(newGeneration)):
+            # print(newGeneration[i].getBody())
+            # print(population[i.getBody())
+            self.population.append(newGeneration[i])
     
     def listToInt(self,arr):
         num = ''.join(str(i) for i in arr)
@@ -199,4 +205,3 @@ class Population(object):
     
     def setMutProb(self,mutProb):
         self.mutProb = mutProb
-    
