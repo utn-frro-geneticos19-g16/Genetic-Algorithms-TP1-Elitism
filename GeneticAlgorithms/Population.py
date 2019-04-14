@@ -16,16 +16,16 @@ class Population(object):
         self.chromSize = chromSize
         self.crossProb = crossProb
         self.mutProb = mutProb
-        print("Objective Function Coeficient:", Chromosome.getCoef())
+        # print("Objective Function Coeficient:", Chromosome.getCoef())
+        print("Start Algorithm")
         for _ in range(numChroms):
             oneChrom = Chromosome(chromSize, None)  # Initialization of Chromosomes
             self.addChrom(oneChrom)  # Add to Population
-            oneObjectivePunctuation = oneChrom.getObjectivePunctuation()  # Objective Function Punctuation of Chromosome
-            self.updateTotalObjPunc(oneObjectivePunctuation)  # Update Class Attribute
 
     # Show Actual Population and Stats
     def showPopulation(self, numIter):
         self.setTotalFitness(0)
+        self.setTotalObjPunc(self.calcTotalObjPunc())
         large = self.getChromSize()
         averageObjPunc = self.getTotalObjPunc() / len(self.population)
         fitness = 0
@@ -59,10 +59,13 @@ class Population(object):
         print("Average OP:", averageObjPunc, "--- Average Fitness:", fitness)  # round(fitness,6)
         print()
 
-    # Update Total of Objective Functions Punctuation
-    @classmethod
-    def updateTotalObjPunc(cls, oneObjectiveValue):
-        cls.totalObjPunc += oneObjectiveValue
+    # Calculate Total of Objective Functions Punctuation in the actual Generation
+    def calcTotalObjPunc(self):
+        acumObjPunc = 0
+        for chromosome in self.population:
+            acumObjPunc += chromosome.getObjectivePunctuation()  # Add Every Objective Function Punctuation
+        #  self.setTotalObjPunc(acumulator)
+        return acumObjPunc
 
     # Update Total Fitness
     @classmethod
@@ -76,10 +79,14 @@ class Population(object):
     # Reproduction
     def reproduce(self):
         parents = []  # List of Potential Parents
-        newGeneration = [] # List of Children
+        newGeneration = []  # List of Children
         print("Roulette Results: ", end='')
-        for _ in range(len(self.population)):
-            parents.append(self.population[self.roulette()])  # Parents Selected by Roulette
+        #  lastParent = None  # Check if a Chromosome tries to reproduce with himself
+        for _ in range(0, len(self.population), 2):
+            lastParent = None
+            for i in range(2):
+                lastParent = self.roulette(lastParent)  # Parents Selected by Roulette
+                parents.append(self.population[lastParent])
         print()
         for i in range(0, len(parents), 2):
             father1 = parents[i]
@@ -100,7 +107,7 @@ class Population(object):
         self.setTotalFitness(0)
 
     # Genetic Operator (Roulette Method)
-    def roulette(self):
+    def roulette(self, lastParent):
         # Generator of a Bidimensional List (Fitness Range of Chromosomes)
         newRoulette = [[0] * 2 for _ in range(len(self.population))]
         acum = 0  # Acumulator of Relative Fitness from 0 to 1 (Fills Roulette)
@@ -110,16 +117,31 @@ class Population(object):
             newRoulette[i][1] = acum  # Range Max: New Acum Value
         ranNum = round(random.uniform(0, 1), 6)  # Random Number from 0.000000 to 0.999999
         # print("Random: ", ranNum)  # Comment this One when Finish
-        for i in range(len(newRoulette)):
-            if newRoulette[i][0] < ranNum < newRoulette[i][1]:
-                # Return Selected Chromosome if the Random Number Exists in its Range
-                print(i, end=', ')
-                return i
+        count = 0
+        while count <= 100:  # If the same parent is selected more than 100 times... select the next or last one
+            for i in range(len(newRoulette)):
+                if newRoulette[i][0] < ranNum < newRoulette[i][1]:
+                    # Return Selected Chromosome if the Random Number Exists in its Range
+                    if lastParent != i:
+                        print(i, end=', ')
+                        return i
+                    else:
+                        print("REP", end=', ')
+                        ranNum = round(random.uniform(0, 1), 6)
+                        break
+            count += 1
+            if count == 100:  # Reach Only if the same parent goes selected 100 times
+                if lastParent < len(newRoulette)-1:
+                    print(lastParent, end=', ')
+                    return lastParent+1
+                else:
+                    print(lastParent, end=', ')
+                    return lastParent-1
         print("Error")
-        return "Error"
+        return "Error"  # Error Exit
 
     def crossPosibility(self):  # CrossOver posibility evaluation
-        if (self.getCrossProb() * 100 >= random.randint(1, 100)):
+        if self.getCrossProb()*100 >= random.randint(1, 100):
             return True
         else:
             return False

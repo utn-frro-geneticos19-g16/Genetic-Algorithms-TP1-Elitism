@@ -5,14 +5,14 @@
 ENUNCIADO DEL TRABAJO PRÁCTICO N° 1
 
 Hacer un programa que utilice un Algoritmo Genético Canónico para buscar un máximo de la función:
-f(x) = (x/coef)^2 en el dominio [0 , 230-1]
--donde coef = 230-1
+f(x) = (x/coef)^2 en el dominio [0 , 230-1] --> Error Enunciado: dominio [0 , (2^30)-1]
+-Donde coef = 230-1 --> Error Enunciado: coef = (2^30)-1
 
 Teniendo en cuenta los siguientes datos:
 –Probabilidad de Crossover = 0,75
 –Probabilidad de Mutación = 0,05
 –Población Inicial: 10 individuos
--Genes de cada Cromosoma: 32 (2^5)
+-Genes de cada Cromosoma: 30
 –Ciclos del programa: 20
 –Método de Selección: Ruleta
 –Método de Crossover: 1 Punto
@@ -31,7 +31,7 @@ todos los cambios que considere oportunos en los parámetros de entrada de maner
 
 FECHA DE ENTREGA DEL TRABAJO PRÁCTICO: 30 de Abril de 2019
 
---> Genetic-Algorithm TP1 --- V2.0 ---  Created on 3 abr. 2019
+--> Genetic-Algorithm TP1 --- V3.5 ---  Created on 3 abr. 2019
 
             Antonelli, Nicolás - Recalde, Alejando - Rohn, Alex
 """
@@ -41,27 +41,27 @@ from GeneticAlgorithms.Population import Population
 # import random
 
 
-# ImportantValues
-iterationLimit = 20  # 20,100,200  # Population Iterations
-initPopulationNum = 10  # Initial Population Size
-chromsomeSize = 32  # Chromosome Size
-crossoverProb = 0.75  # Probability of CrossOver
-mutationProb = 0.05  # Probability of Mutation
-
-# Main Constructor
 if __name__ == '__main__':
+    # ImportantValues
+    iterationLimit = 20  # 20,100,200  # Population Iterations
+    initPopulationNum = 10  # Initial Population Size
+    chromsomeSize = 30  # Chromosome Size
+    crossoverProb = 0.75  # Probability of CrossOver
+    mutationProb = 0.05  # Probability of Mutation
 
-    # First Population
-    pob = Population(initPopulationNum, chromsomeSize, crossoverProb, mutationProb)
+    # Initialize
+    class Main(object):
+        # First Population
+        pob = Population(initPopulationNum, chromsomeSize, crossoverProb, mutationProb)
 
-    # Iterations
-    for iterationCount in range(iterationLimit):
-        print()
-        pob.showPopulation(iterationCount)
+        # Iterations
+        for iterationCount in range(iterationLimit):
+            print()
+            pob.showPopulation(iterationCount)
 
-        # In the last iteration, the chromosome population mustn't reproduce
-        if iterationCount < iterationLimit - 1:
-            pob.reproduce()
+            # In the last iteration, the chromosomes population mustn't reproduce
+            if iterationCount < iterationLimit - 1:
+                pob.reproduce()
 
-    # End Comparation
-    print("Last Generation Reached Correctly")
+        # End Comparation
+        print("Last Generation Reached Correctly")

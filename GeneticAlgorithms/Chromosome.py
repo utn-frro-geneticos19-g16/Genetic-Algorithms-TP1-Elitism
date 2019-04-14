@@ -5,7 +5,8 @@ import random
 
 class Chromosome(object):
     # Class Attribute (Constant)
-    coef = random.randint(1, 230 - 1)
+    # coef = random.randint(1, 230 - 1)
+    coef = (2**30)-1  # (2^30)-1
 
     # Constructor / Instance Attributes
     def __init__(self, large, newBody):
@@ -36,16 +37,12 @@ class Chromosome(object):
         return (realValue / self.getCoef()) ** 2
 
     def calcFitness(self, totalObj):
-        if totalObj == 0:
-            totalObj = 1  # Prevent Division by Zero Error
+        # if totalObj == 0: totalObj = 1  # Prevent Division by Zero Error
         self.fitness = (self.getObjectivePunctuation() / totalObj)  # Update Fitness
         return self.fitness
 
-    def copy(self, Chrom, num1, num2):
-        pass
-
-    def mutate(self):
-        pass
+    # def copy(self, Chrom, num1, num2): pass
+    # def mutate(self): pass
 
     # Class Methods
     @classmethod
