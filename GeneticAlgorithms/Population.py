@@ -58,6 +58,8 @@ class Population(object):
               self.population[minChrom].getObjectivePunctuation(), "OP,", round(minVal, 4), "Fit")
         print("Average OP:", averageObjPunc, "--- Average Fitness:", fitness)  # round(fitness,6)
         print()
+        return (self.population[maxChrom].getRealValue(), self.population[maxChrom].getObjectivePunctuation(),
+                averageObjPunc)  # Return Important Data to use on Graphics
 
     # Calculate Total of Objective Functions Punctuation in the actual Generation
     def calcTotalObjPunc(self):
@@ -93,10 +95,10 @@ class Population(object):
             father2 = parents[i + 1]
             if self.crossPosibility():  # CrossOver Probability Evaluation
                 son1, son2 = self.cross(father1, father2)  # CrossOver
-                print("Successful CrossOver in reproduction:", (i + 2) / 2)  # Comment this One when Finish
+                print("Successful CrossOver in reproduction:", (i + 2) / 2)  # Only Print
             else:
                 son1, son2 = self.copy(father1, father2)  # Direct Assignation (Without CrossOver)
-                print("CrossOver didn't happen in reproduction:", (i + 2) / 2)  # Comment this One when Finish
+                print("CrossOver didn't happen in reproduction:", (i + 2) / 2)  # Only Print
             # Individual Mutation Probability Evaluation
             if self.mutationPosibility():
                 son1 = self.mutation(son1)
@@ -116,7 +118,7 @@ class Population(object):
             acum += round(self.population[i].getFitness(), 6)  # Acum's Value From Zero
             newRoulette[i][1] = acum  # Range Max: New Acum Value
         ranNum = round(random.uniform(0, 1), 6)  # Random Number from 0.000000 to 0.999999
-        # print("Random: ", ranNum)  # Comment this One when Finish
+        # print("Random: ", ranNum)  # Only Print
         count = 0
         while count <= 100:  # If the same parent is selected more than 100 times... select the next or last one
             for i in range(len(newRoulette)):
@@ -161,9 +163,9 @@ class Population(object):
         son1 = Chromosome(self.chromSize, newBody1)
         son2 = Chromosome(self.chromSize, newBody2)
         print()
-        print("Son 1:", self.listToInt(newBody1))  # Comment this One when Finish
-        print("Son 2:", self.listToInt(newBody2))  # Comment this One when Finish
-        print("Cut Point on:", cut)  # Comment this One when Finish
+        print("Son 1:", self.listToInt(newBody1))  # Only Print
+        print("Son 2:", self.listToInt(newBody2))  # Only Print
+        print("Cut Point on:", cut)  # Only Print
         return son1, son2
 
     def copy(self, chrom1, chrom2):
@@ -172,8 +174,8 @@ class Population(object):
         son1 = chrom1
         son2 = chrom2
         print()
-        print("Son 1 (Identical):", self.listToInt(chrom1.getBody()))  # Comment this One when Finish
-        print("Son 2 (Identical):", self.listToInt(chrom2.getBody()))  # Comment this One when Finish
+        print("Son 1 (Identical):", self.listToInt(chrom1.getBody()))  # Only Print
+        print("Son 2 (Identical):", self.listToInt(chrom2.getBody()))  # Only Print
         return son1, son2
 
     def mutationPosibility(self):  # Mutation posibility evaluation
@@ -193,10 +195,8 @@ class Population(object):
                     newBody.append(0)
                 else:
                     newBody.append(1)
-        # newGeneration.append(Chromosome(self.chromSize, newBody))
         son = Chromosome(self.chromSize, newBody)
-        print("Mutated Chrom in position:", mutPos, ":", self.listToInt(chrom.getBody()))
-        # Comment this One when Finish
+        print("Mutated Chrom in position:", mutPos, ":", self.listToInt(chrom.getBody()))  # Only Print
         return son
 
     def addChildren(self, son1, son2, newGeneration):
@@ -206,8 +206,6 @@ class Population(object):
     def replacePopulation(self, newGeneration):  # Replace All Population in every Iteration
         self.population = []
         for i in range(len(newGeneration)):
-            # print(newGeneration[i].getBody())
-            # print(population[i.getBody())
             self.population.append(newGeneration[i])
 
     def listToInt(self, arr):

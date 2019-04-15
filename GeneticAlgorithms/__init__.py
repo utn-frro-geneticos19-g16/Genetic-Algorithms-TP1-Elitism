@@ -31,19 +31,20 @@ todos los cambios que considere oportunos en los parámetros de entrada de maner
 
 FECHA DE ENTREGA DEL TRABAJO PRÁCTICO: 30 de Abril de 2019
 
---> Genetic-Algorithm TP1 --- V3.5 ---  Created on 3 abr. 2019
+--> Genetic-Algorithm TP1 --- V4.0 ---  Created on 3 abr. 2019
 
             Antonelli, Nicolás - Recalde, Alejando - Rohn, Alex
 """
 
 from GeneticAlgorithms.Population import Population
+from GeneticAlgorithms.Graphs import Graphic
 # from GeneticAlgorithms.Chromosome import Chromosome
 # import random
 
 
 if __name__ == '__main__':
     # ImportantValues
-    iterationLimit = 20  # 20,100,200  # Population Iterations
+    iterationLimit = 50  # 20,100,200  # Population Iterations
     initPopulationNum = 10  # Initial Population Size
     chromsomeSize = 30  # Chromosome Size
     crossoverProb = 0.75  # Probability of CrossOver
@@ -53,15 +54,25 @@ if __name__ == '__main__':
     class Main(object):
         # First Population
         pob = Population(initPopulationNum, chromsomeSize, crossoverProb, mutationProb)
+        graphicsData = {'maxValues': [], 'maxOPs': [], 'averageOPs': []}  # Dictionary for Graphics
 
         # Iterations
         for iterationCount in range(iterationLimit):
             print()
-            pob.showPopulation(iterationCount)
+            maxVal, maxOP, averageOP = pob.showPopulation(iterationCount)  # Show Actual Population and Return Data
+
+            # Update Dictionary with important values
+            graphicsData['maxValues'].append(maxVal)
+            graphicsData['maxOPs'].append(maxOP)
+            graphicsData['averageOPs'].append(averageOP)
 
             # In the last iteration, the chromosomes population mustn't reproduce
             if iterationCount < iterationLimit - 1:
-                pob.reproduce()
+                pob.reproduce()  # Reproduction of Actual Generation
 
-        # End Comparation
+        # Graph Population's Evolution
+        graph = Graphic(graphicsData, iterationLimit)
+        graph.showPlots()
+
+        # Final Message
         print("Last Generation Reached Correctly")
