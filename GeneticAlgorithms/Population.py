@@ -58,8 +58,9 @@ class Population(object):
               self.population[minChrom].getObjectivePunctuation(), "OP,", round(minVal, 4), "Fit")
         print("Average OP:", averageObjPunc, "--- Average Fitness:", fitness)  # round(fitness,6)
         print()
-        return (self.population[maxChrom].getRealValue(), self.population[maxChrom].getObjectivePunctuation(),
-                averageObjPunc)  # Return Important Data to use on Graphics
+        # Return Important Data to use on Graphics
+        return (averageObjPunc, self.population[minChrom].getObjectivePunctuation(),
+                self.population[maxChrom].getObjectivePunctuation())
 
     # Calculate Total of Objective Functions Punctuation in the actual Generation
     def calcTotalObjPunc(self):
