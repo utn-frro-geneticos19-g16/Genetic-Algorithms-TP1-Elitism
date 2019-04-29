@@ -7,6 +7,7 @@ from matplotlib import pyplot
 
 # pyplot.plot(x1,y1,'b-',x2,y2,'r-',x3,y3,'g-')
 # pyplot.legend('value 1', 'value 2', 'value 3')
+# pyplot.savefig('generations.png')  # Save Image --> Better Save Manually
 
 
 class Graphic(object):

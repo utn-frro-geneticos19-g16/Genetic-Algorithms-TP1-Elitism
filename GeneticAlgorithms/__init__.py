@@ -31,7 +31,7 @@ todos los cambios que considere oportunos en los parámetros de entrada de maner
 
 FECHA DE ENTREGA DEL TRABAJO PRÁCTICO: 30 de Abril de 2019
 
---> Genetic-Algorithm TP1 --- V4.2 ---  Created on 3 abr. 2019
+--> Genetic-Algorithm TP1 --- V4.5 ---  Created on 3 abr. 2019
 
             Antonelli, Nicolás - Recalde, Alejando - Rohn, Alex
 """
@@ -74,5 +74,16 @@ if __name__ == '__main__':
         graph = Graphic(graphicsData, iterationLimit)
         graph.showPlots()
 
-        # Final Message
+        # Last Reproduction Message
         print("Last Generation Reached Correctly")
+        print("------------")
+        print()
+        print()
+
+        # Final Tables
+        print("TABLAS FINALES")
+        print()
+        print("Población ------------ Mínimo ------------ Máximo ------------ Promedio")
+        for value in range(iterationLimit):
+            print("Generación ", value, ":", graphicsData['minOPs'][value], "---", graphicsData['maxOPs'][value], "---",
+                  graphicsData['averageOPs'][value])
