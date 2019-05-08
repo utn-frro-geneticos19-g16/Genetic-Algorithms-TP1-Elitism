@@ -149,23 +149,24 @@ class Population(object):
         else:
             return False
 
-    def cross(self, chrom1, chrom2):
-        newBody1 = []
-        newBody2 = []
-        cut = random.randint(1, len(chrom1.getBody()) - 2)  # Random Cut Point (Except by zero or all genes)
-        for i in range(0, cut):  # Genetic Material Exchange (Genes)
-            newBody1.append(chrom1.getBody()[i])  # Each Chromosome Exchange Genes With the Other One
-            newBody2.append(chrom2.getBody()[i])
-        for i in range(cut, len(chrom1.getBody())):
-            newBody1.append(chrom2.getBody()[i])
-            newBody2.append(chrom1.getBody()[i])
-        # newGeneration.append(Chromosome(self.chromSize, newBody1))
-        # newGeneration.append(Chromosome(self.chromSize, newBody2))
-        son1 = Chromosome(self.chromSize, newBody1)
-        son2 = Chromosome(self.chromSize, newBody2)
+    def cross(self, parent1, parent2):
+        crom_size = parent1.getLarge()
+        son1 = Chromosome(crom_size, None)
+        son2 = Chromosome(crom_size, None)
+        cut = random.randint(1, crom_size - 2)  # Random Cut Point (Except by zero or all genes)
+
+        son1.copy(parent1, 0, cut)
+        son1.copy(parent2, cut, crom_size)
+
+        son2.copy(parent2, 0, cut)
+        son2.copy(parent1, cut, crom_size)
+
+        son1.setObjectivePunctuation()
+        son2.setObjectivePunctuation()
+
         print()
-        print("Son 1:", self.listToInt(newBody1))  # Only Print
-        print("Son 2:", self.listToInt(newBody2))  # Only Print
+        print("Son 1:", son1.toBinInteger())  # Only Print
+        print("Son 2:", son2.toBinInteger())  # Only Print
         print("Cut Point on:", cut)  # Only Print
         return son1, son2
 
