@@ -86,7 +86,7 @@ class Population(object):
         print("Roulette Results: ", end='')
         #  lastParent = None  # Check if a Chromosome tries to reproduce with himself
         for _ in range(0, len(self.population), 2):
-            lastParent = None
+            lastParent = 0
             for i in range(2):
                 lastParent = self.roulette(lastParent)  # Parents Selected by Roulette
                 parents.append(self.population[lastParent])
@@ -97,14 +97,16 @@ class Population(object):
             if self.crossPosibility():  # CrossOver Probability Evaluation
                 son1, son2 = self.cross(father1, father2)  # CrossOver
                 print("Successful CrossOver in reproduction:", (i + 2) / 2)  # Only Print
+
+                # Individual Mutation Probability Evaluation only when Crossover is successful
+                if self.mutationPosibility():
+                    son1.mutate()
+                if self.mutationPosibility():
+                    son2.mutate()
             else:
                 son1, son2 = self.copy(father1, father2)  # Direct Assignation (Without CrossOver)
                 print("CrossOver didn't happen in reproduction:", (i + 2) / 2)  # Only Print
-            # Individual Mutation Probability Evaluation
-            if self.mutationPosibility():
-                son1 = self.mutation(son1)
-            if self.mutationPosibility():
-                son2 = self.mutation(son2)
+
             self.addChildren(son1, son2, newGeneration)
         self.replacePopulation(newGeneration)
         self.setTotalFitness(0)
@@ -185,21 +187,6 @@ class Population(object):
             return True
         else:
             return False
-
-    def mutation(self, chrom):  # Select one random Gen and Switch its Value
-        mutPos = random.randint(1, len(self.population))
-        newBody = []
-        for i in range(len(chrom.getBody())):
-            if i != mutPos:
-                newBody.append(chrom.getBody()[i])
-            else:
-                if chrom.getBody()[mutPos] == 1:  # If is a '0' then change to '1', and vice-versa
-                    newBody.append(0)
-                else:
-                    newBody.append(1)
-        son = Chromosome(self.chromSize, newBody)
-        print("Mutated Chrom in position:", mutPos, ":", self.listToInt(chrom.getBody()))  # Only Print
-        return son
 
     def addChildren(self, son1, son2, newGeneration):
         newGeneration.append(son1)

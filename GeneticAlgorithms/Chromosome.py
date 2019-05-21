@@ -45,9 +45,6 @@ class Chromosome(object):
         self.fitness = (self.getObjectivePunctuation() / totalObj)  # Update Fitness
         return self.fitness
 
-    # def copy(self, Chrom, num1, num2): pass
-    # def mutate(self): pass
-
     # Class Methods
     @classmethod
     def getCoef(cls):
@@ -73,9 +70,19 @@ class Chromosome(object):
     def getFitness(self):
         return self.fitness
 
-    def setFintess(self, fitness):
+    def setFitness(self, fitness):
         self.fitness = fitness
 
     def copy(self, another_crom, start, end):
         for i in range(start, end):
             self.body[i] = (another_crom.body[i])
+
+    def mutate(self):
+        mutPos = random.randint(0, self.getLarge()-1)
+
+        if self.body[mutPos] == '0':  # If is a '0' then change to '1', and vice-versa
+            self.body[mutPos] = '1'
+        elif self.body[mutPos] == '1':
+            self.body[mutPos] = '0'
+
+        print("Mutated Chrom in position:", mutPos, ":", self.toBinInteger())
