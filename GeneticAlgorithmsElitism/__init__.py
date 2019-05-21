@@ -36,9 +36,9 @@ FECHA DE ENTREGA DEL TRABAJO PRÁCTICO: 30 de Abril de 2019
             Antonelli, Nicolás - Recalde, Alejando - Rohn, Alex
 """
 
-from GeneticAlgorithms.Population import Population
-from GeneticAlgorithms.Graphs import Graphic
-# from GeneticAlgorithms.Chromosome import Chromosome
+from GeneticAlgorithmsElitism.Population import Population
+from GeneticAlgorithmsElitism.Graphs import Graphic
+# from GeneticAlgorithmsElitism.Chromosome import Chromosome
 # import random
 
 
@@ -59,7 +59,7 @@ if __name__ == '__main__':
         # Iterations
         for iterationCount in range(iterationLimit):
             print()
-            averageOP, minOP, maxOP = pob.showPopulation(iterationCount)  # Show Actual Population and Return Data
+            averageOP, minOP, maxOP, elitChrom = pob.showPopulation(iterationCount)  # Show Actual Population and Return Data
 
             # Update Dictionary with important values
             graphicsData['averageOPs'].append(averageOP)
@@ -68,7 +68,7 @@ if __name__ == '__main__':
 
             # In the last iteration, the chromosomes population mustn't reproduce
             if iterationCount < iterationLimit - 1:
-                pob.reproduce()  # Reproduction of Actual Generation
+                pob.reproduce(elitChrom)  # Reproduction of Actual Generation
 
         # Graph Population's Evolution
         graph = Graphic(graphicsData, iterationLimit)
