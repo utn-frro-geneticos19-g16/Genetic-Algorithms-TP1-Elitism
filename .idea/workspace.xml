@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5d5d8a42-771c-4131-a278-b5123e68124c" name="Default Changelist" comment="Move mu">
-      <change beforePath="$PROJECT_DIR$/.idea/Genetic-Algorithms.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Genetic-Algorithms.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GeneticAlgorithms/Chromosome.py" beforeDir="false" afterPath="$PROJECT_DIR$/GeneticAlgorithms/Chromosome.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GeneticAlgorithms/Population.py" beforeDir="false" afterPath="$PROJECT_DIR$/GeneticAlgorithms/Population.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GeneticAlgorithmsElitism/Population.py" beforeDir="false" afterPath="$PROJECT_DIR$/GeneticAlgorithmsElitism/Population.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,31 +27,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/__init__.py">
+        <entry file="file://$PROJECT_DIR$/GeneticAlgorithmsElitism/Population.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="46" column="22" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
-              <folding>
-                <element signature="e#1517#1568#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Chromosome.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="721">
-              <caret line="86" selection-start-line="86" selection-end-line="86" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Population.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="100" column="94" selection-start-line="100" selection-start-column="94" selection-end-line="100" selection-end-column="94" />
+            <state relative-caret-position="66">
+              <caret line="92" column="71" selection-start-line="92" selection-start-column="71" selection-end-line="92" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -76,6 +52,7 @@
         <option value="$PROJECT_DIR$/GeneticAlgorithms/Population.py" />
         <option value="$PROJECT_DIR$/GeneticAlgorithms/Chromosome.py" />
         <option value="$PROJECT_DIR$/GeneticAlgorithms/__init__.py" />
+        <option value="$PROJECT_DIR$/GeneticAlgorithmsElitism/Population.py" />
       </list>
     </option>
   </component>
@@ -90,14 +67,29 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Genetic-Algorithms-Elitism" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Genetic-Algorithms-Elitism" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Genetic-Algorithms-Elitism" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Genetic-Algorithms-Elitism" type="462c0819:PsiDirectoryNode" />
+              <item name="GeneticAlgorithmsElitism" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/GeneticAlgorithms/__init__.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/GeneticAlgorithmsElitism/__init__.py" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -126,12 +118,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="/usr/bin/python3.5" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/GeneticAlgorithms" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/GeneticAlgorithmsElitism" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GeneticAlgorithms/__init__.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GeneticAlgorithmsElitism/__init__.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -185,21 +177,22 @@
       <workItem from="1557273375450" duration="3223000" />
       <workItem from="1557276616415" duration="1225000" />
       <workItem from="1558446282615" duration="7403000" />
+      <workItem from="1558554211315" duration="1419000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11851000" />
+    <option name="totallyTimeSpent" value="13270000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1054" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2550586" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25772098" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.5" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.032051284" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39957264" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -213,7 +206,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.32960597" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.32960597" />
       <window_info anchor="right" id="Database" order="4" weight="0.32960597" />
     </layout>
   </component>
@@ -223,30 +216,16 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Genetic_Algorithms$GeneticAlgorithms.coverage" NAME="GeneticAlgorithms Coverage Results" MODIFIED="1557277795827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/GeneticAlgorithms" />
     <SUITE FILE_PATH="coverage/Genetic_Algorithms$Population.coverage" NAME="Population Coverage Results" MODIFIED="1557276622490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/GeneticAlgorithms" />
-    <SUITE FILE_PATH="coverage/Genetic_Algorithms_Elitism$GeneticAlgorithms.coverage" NAME="GeneticAlgorithms Coverage Results" MODIFIED="1558454308547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/GeneticAlgorithms" />
+    <SUITE FILE_PATH="coverage/Genetic_Algorithms_Elitism$GeneticAlgorithms.coverage" NAME="GeneticAlgorithms Coverage Results" MODIFIED="1558555549081" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/GeneticAlgorithmsElitism" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Chromosome.py">
+    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Chromosome.py" />
+    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Population.py" />
+    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/GeneticAlgorithmsElitism/Population.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="721">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/Population.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="100" column="94" selection-start-line="100" selection-start-column="94" selection-end-line="100" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GeneticAlgorithms/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="46" column="22" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
-          <folding>
-            <element signature="e#1517#1568#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="66">
+          <caret line="92" column="71" selection-start-line="92" selection-start-column="71" selection-end-line="92" selection-end-column="71" />
         </state>
       </provider>
     </entry>

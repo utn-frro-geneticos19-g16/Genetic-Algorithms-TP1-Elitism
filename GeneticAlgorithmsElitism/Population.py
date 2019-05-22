@@ -86,16 +86,17 @@ class Population(object):
         newGeneration = []  # List of Children
         print("Roulette Results: ", end='')
 
+        # TO-DO:Send the second best Chromosome
+
         # Elitism
         parents.append(elitChrom)
-        parents.append(self.population[self.roulette(None)])
+        # This happens to add another chrom position in parents console display
+        parents.append(self.population[self.roulette()])
         self.addChildren(parents[0], parents[1], newGeneration)
 
-        #  lastParent = None  # Check if a Chromosome tries to reproduce with himself
         for _ in range(2, len(self.population), 2):
-            lastParent = None
             for i in range(2):
-                lastParent = self.roulette(lastParent)  # Parents Selected by Roulette
+                lastParent = self.roulette()  # Parents Selected by Roulette
                 parents.append(self.population[lastParent])
         print()
         for i in range(2, len(parents), 2):
@@ -104,15 +105,15 @@ class Population(object):
             if self.crossPosibility():  # CrossOver Probability Evaluation
                 son1, son2 = self.cross(father1, father2)  # CrossOver
                 print("Successful CrossOver in reproduction:", (i + 2) / 2 - 1)  # Only Print
-
-                # Individual Mutation Probability Evaluation only when Crossover is successful
-                if self.mutationPosibility():
-                    son1.mutate()
-                if self.mutationPosibility():
-                    son2.mutate()
             else:
                 son1, son2 = self.copy(father1, father2)  # Direct Assignation (Without CrossOver)
                 print("CrossOver didn't happen in reproduction:", (i + 2) / 2 - 1)  # Only Print
+
+            # Individual Mutation Probability Evaluation even when Crossover is not successful
+            if self.mutationPosibility():
+                son1.mutate()
+            if self.mutationPosibility():
+                son2.mutate()
             son1.setObjectivePunctuation()
             son2.setObjectivePunctuation()
             self.addChildren(son1, son2, newGeneration)
@@ -123,7 +124,7 @@ class Population(object):
         self.setTotalFitness(0)
 
     # Genetic Operator (Roulette Method)
-    def roulette(self, lastParent):
+    def roulette(self):
         # Generator of a Bidimensional List (Fitness Range of Chromosomes)
         newRoulette = [[0] * 2 for _ in range(len(self.population))]
         acum = 0  # Acumulator of Relative Fitness from 0 to 1 (Fills Roulette)
@@ -133,28 +134,11 @@ class Population(object):
             newRoulette[i][1] = acum  # Range Max: New Acum Value
         ranNum = round(random.uniform(0, 1), 6)  # Random Number from 0.000000 to 0.999999
         # print("Random: ", ranNum)  # Only Print
-        count = 0
-        while count <= 100:  # If the same parent is selected more than 100 times... select the next or last one
-            for i in range(len(newRoulette)):
-                if newRoulette[i][0] < ranNum < newRoulette[i][1]:
-                    # Return Selected Chromosome if the Random Number Exists in its Range
-                    if lastParent != i:
-                        print(i, end=', ')
-                        return i
-                    else:
-                        print("REP", end=', ')
-                        ranNum = round(random.uniform(0, 1), 6)
-                        break
-            count += 1
-            if count == 100:  # Reach Only if the same parent goes selected 100 times
-                if lastParent < len(newRoulette)-1:
-                    print(lastParent, end=', ')
-                    return lastParent+1
-                else:
-                    print(lastParent, end=', ')
-                    return lastParent-1
-        print("Error")
-        return "Error"  # Error Exit
+        for i in range(len(newRoulette)):
+            if newRoulette[i][0] < ranNum < newRoulette[i][1]:
+                # Return Selected Chromosome if the Random Number Exists in its Range
+                print(i, end=', ')
+                return i
 
     def crossPosibility(self):  # CrossOver posibility evaluation
         if self.getCrossProb()*100 >= random.randint(1, 100):
