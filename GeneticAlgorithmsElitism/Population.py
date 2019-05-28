@@ -30,8 +30,10 @@ class Population(object):
         averageObjPunc = self.getTotalObjPunc() / len(self.population)
         fitness = 0
         maxVal = 0
+        secondMaxVal = 0
         minVal = 0
         maxChrom = 0
+        secondMaxChrom = 0
         minChrom = 0
         print("Population ", (numIter + 1), ":")
         for i in range(len((self.population))):
@@ -46,6 +48,9 @@ class Population(object):
             elif fitness < minVal:
                 minVal = fitness
                 minChrom = i
+            elif (fitness > secondMaxVal) and (fitness < maxVal):
+                secondMaxVal = fitness
+                secondMaxChrom = i
             for j in range(large):
                 print(self.population[i].getBody()[j], end='')
             print()
@@ -54,14 +59,17 @@ class Population(object):
         print("Chromosome --- Value --- Objective Punctuation --- Fitness")
         print("Max Values: Chrom Nº", maxChrom, "with:", self.population[maxChrom].getRealValue(), "Val,",
               self.population[maxChrom].getObjectivePunctuation(), "OP,", round(maxVal, 4), "Fit")
+        print("Second Max Values: Chrom Nº", secondMaxChrom, "with:", self.population[secondMaxChrom].getRealValue(), "Val,",
+              self.population[secondMaxChrom].getObjectivePunctuation(), "OP,", round(secondMaxVal, 4), "Fit")
         print("Min Values: Chrom Nº", minChrom, "with:", self.population[minChrom].getRealValue(), "Val,",
               self.population[minChrom].getObjectivePunctuation(), "OP,", round(minVal, 4), "Fit")
         print("Average OP:", averageObjPunc, "--- Average Fitness:", fitness)  # round(fitness,6)
         print()
         # Return Important Data to use on Graphics
         elitChrom = self.population[maxChrom]
+        secondEliChrom = self.population[secondMaxChrom]
         return (averageObjPunc, self.population[minChrom].getObjectivePunctuation(),
-                self.population[maxChrom].getObjectivePunctuation(), elitChrom)
+                self.population[maxChrom].getObjectivePunctuation(), elitChrom, secondEliChrom)
 
     # Calculate Total of Objective Functions Punctuation in the actual Generation
     def calcTotalObjPunc(self):
@@ -81,7 +89,7 @@ class Population(object):
         self.population.append(Chrom)
 
     # Reproduction
-    def reproduce(self, elitChrom):
+    def reproduce(self, elitChrom, secondElitChrom):
         parents = []  # List of Potential Parents
         newGeneration = []  # List of Children
         print("Roulette Results: ", end='')
@@ -90,8 +98,7 @@ class Population(object):
 
         # Elitism
         parents.append(elitChrom)
-        # This happens to add another chrom position in parents console display
-        parents.append(self.population[self.roulette()])
+        parents.append(secondElitChrom)
         self.addChildren(parents[0], parents[1], newGeneration)
 
         for _ in range(2, len(self.population), 2):
